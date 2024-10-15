@@ -1,16 +1,12 @@
-import express, { Router } from "express"
-import { addConsult, getAllDoctor, getAllUsers, getConsult, signIn, signup, updateConsult, uploadProfile } from "../controllers/userController.js";
+import express from "express"
+import { registerController,loginController,getUserProfileController} from "../controllers/userController.js";
+import { isAuthenticated } from "../middileware/authMiddileware.js";
 
 const router=express.Router();
 
-router.post("/signup",signup);
-router.post("/upload-profile",uploadProfile);
-router.post("/signin",signIn)
-router.get("/all",getAllUsers)
-router.post("/consult",addConsult)
-router.get("/consult",getConsult)
-router.patch("/consult/:id",updateConsult)
-router.get("/doctor",getAllDoctor)
+router.post("/register",registerController);
+router.post("/login",loginController)
+router.get("/profile/:id",isAuthenticated,getUserProfileController)
 
 
 
